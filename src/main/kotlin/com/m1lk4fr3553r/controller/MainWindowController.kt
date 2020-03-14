@@ -17,6 +17,7 @@ class MainWindowController : DefaultFocusManager() {
         frame.isVisible = true
         KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(this)
         frame.filterField.addKeyListener(FilterKeyListener(::filter, ::resetFilter))
+        frame.searchField.addKeyListener(FilterKeyListener(::search, ::resetSearch))
     }
 
     private fun loadFileWithOpenDialog() {
@@ -39,28 +40,52 @@ class MainWindowController : DefaultFocusManager() {
     private fun filter() {
         val filtered: List<JSONListItem> = loadedData.filter { it.raw.contains(frame.filterField.text.toLowerCase()) }
         frame.list.setListData(filtered.toTypedArray())
+        frame.list.requestFocus()
     }
 
     private fun resetFilter() {
         frame.filterField.text = ""
         frame.list.setListData(loadedData)
+        frame.list.requestFocus()
+    }
+
+    private fun search() {
+        val results = loadedData.filter { it.raw.contains(frame.searchField.text.toLowerCase()) }.map { loadedData.indexOf(it) }
+        for (i in results) {
+            if (i > frame.list.selectedIndex) {
+                frame.list.setSelectedValue(frame.list.model.getElementAt(i), true)
+                break
+            }
+        }
+    }
+
+    private fun resetSearch() {
+        frame.searchField.text = ""
+        frame.list.requestFocus()
     }
 
     override fun dispatchKeyEvent(e: KeyEvent?): Boolean {
-        if (frame.isActive && e?.id == KeyEvent.KEY_RELEASED && !frame.filterField.hasFocus()) {
+        if (frame.isActive && e?.id == KeyEvent.KEY_RELEASED && !frame.filterField.hasFocus() && !frame.searchField.hasFocus()) {
             println(e.keyCode)
             when (e.keyCode) {
-                // l
+                // ENTER
+                10 -> {
+                    ItemView(frame.list.selectedValue, frame)
+                    return true
+                }
+                // F
+                70 -> {
+                    frame.filterField.requestFocus()
+                    return true
+                }
+                // L
                 76 -> {
                     loadFileWithOpenDialog()
                     return true
                 }
-                70 -> {
-                    return true
-                }
-                // ENTER
-                10 -> {
-                    ItemView(frame.list.selectedValue, frame)
+                // S
+                83 -> {
+                    frame.searchField.requestFocus()
                     return true
                 }
                 else -> return false

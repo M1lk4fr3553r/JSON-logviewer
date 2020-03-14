@@ -10,13 +10,17 @@ class MainWindow(title: String) : JFrame() {
     val scrollPane: JScrollPane
     val statusBar = JToolBar()
     val filterField = JTextField()
+    val searchField = JTextField()
 
     init {
         initWindow(title)
         list.cellRenderer = ItemListCellRenderer()
         scrollPane = JScrollPane(list)
         add(scrollPane)
+        statusBar.add(JLabel("Filter:"))
         statusBar.add(filterField)
+        statusBar.add(JLabel("Search:"))
+        statusBar.add(searchField)
         add(statusBar, BorderLayout.SOUTH)
     }
 
