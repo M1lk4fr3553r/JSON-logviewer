@@ -10,7 +10,7 @@ import javax.swing.JFileChooser
 class MainWindowController: DefaultFocusManager() {
     private val frame: MainWindow
     init {
-        frame = MainWindow("JSON log viewer")
+        frame = MainWindow("JSON logviewer")
         frame.isVisible = true
         KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(this)
     }

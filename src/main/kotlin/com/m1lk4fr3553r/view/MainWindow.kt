@@ -18,6 +18,7 @@ class MainWindow(title: String): JFrame() {
             listModel.addElement(JSONListItem())
         }
         list.model = listModel
+        list.setCellRenderer(ItemListCellRenderer())
         scrollPane = JScrollPane(list)
         add(scrollPane)
     }
