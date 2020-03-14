@@ -15,13 +15,10 @@ class JSONParser {
             for (line in file.readLines()) {
                 val tokener = JSONTokener(line)
                 val jsonObject = JSONObject(tokener)
-                val item = JSONListItem(jsonObject.toString().toLowerCase())
+                val item = JSONListItem(jsonObject)
                 item.timestampKey = prop.getProperty("key.timestamp", "timestamp")
                 item.levelKey = prop.getProperty("key.level", "level")
                 item.messageKey = prop.getProperty("key.message", "message")
-                for (key in jsonObject.keys()) {
-                    item.items.put(key, jsonObject.get(key).toString())
-                }
                 items += item
             }
             return items
