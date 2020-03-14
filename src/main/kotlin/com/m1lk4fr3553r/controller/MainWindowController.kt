@@ -4,6 +4,7 @@ import com.m1lk4fr3553r.view.ItemView
 import com.m1lk4fr3553r.view.MainWindow
 import java.awt.KeyboardFocusManager
 import java.awt.event.KeyEvent
+import java.io.File
 import javax.swing.DefaultFocusManager
 import javax.swing.JFileChooser
 
@@ -15,11 +16,18 @@ class MainWindowController : DefaultFocusManager() {
         KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(this)
     }
 
-    private fun loadFile() {
+    private fun loadFileWithOpenDialog() {
         val fileChooser = JFileChooser()
         fileChooser.showOpenDialog(frame)
         if (fileChooser.selectedFile.isFile && fileChooser.selectedFile != null) {
             frame.list.setListData(JSONParser.parse(fileChooser.selectedFile))
+        }
+    }
+
+    fun loadFile(path: String) {
+        val file = File(path)
+        if (file.isFile) {
+            frame.list.setListData(JSONParser.parse(file))
         }
     }
 
@@ -29,7 +37,7 @@ class MainWindowController : DefaultFocusManager() {
             when (e.keyCode) {
                 // l
                 76 -> {
-                    loadFile()
+                    loadFileWithOpenDialog()
                     return true
                 }
                 70 -> {
