@@ -4,7 +4,6 @@ import com.m1lk4fr3553r.model.JSONListItem
 import org.json.JSONObject
 import org.json.JSONTokener
 import java.io.File
-import java.io.InputStream
 import java.util.*
 
 class JSONParser {
@@ -19,7 +18,7 @@ class JSONParser {
                 item.timestampKey = prop.getProperty("timestamp", "timestamp")
                 item.levelKey = prop.getProperty("level", "level")
                 item.messageKey = prop.getProperty("message", "message")
-                for(key in jsonObject.keys()) {
+                for (key in jsonObject.keys()) {
                     item.items.put(key, jsonObject.get(key).toString())
                 }
                 items += item
@@ -28,7 +27,7 @@ class JSONParser {
         }
 
         fun getProperties(): Properties {
-            val stream =  JSONParser::class.java.classLoader.getResourceAsStream("JSONlogviewer.properties")
+            val stream = JSONParser::class.java.classLoader.getResourceAsStream("JSONlogviewer.properties")
             val prop = Properties()
             prop.load(stream)
             return prop

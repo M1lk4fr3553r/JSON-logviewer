@@ -6,11 +6,11 @@ import java.awt.Component
 import javax.swing.DefaultListCellRenderer
 import javax.swing.JList
 
-class ItemListCellRenderer: DefaultListCellRenderer() {
+class ItemListCellRenderer : DefaultListCellRenderer() {
     override fun getListCellRendererComponent(list: JList<*>?, value: Any?, index: Int, isSelected: Boolean, cellHasFocus: Boolean): Component {
         val item = (value as JSONListItem)
         val component = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus)
-        when(item.items.get(item.levelKey)) {
+        when (item.items.get(item.levelKey)) {
             "WARN" -> component.foreground = Color.ORANGE
             "DEBUG" -> component.foreground = Color.GREEN
             "ERROR" -> component.foreground = Color.RED

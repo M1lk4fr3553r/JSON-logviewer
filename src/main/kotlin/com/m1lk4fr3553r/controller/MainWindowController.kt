@@ -7,15 +7,15 @@ import java.awt.event.KeyEvent
 import javax.swing.DefaultFocusManager
 import javax.swing.JFileChooser
 
-class MainWindowController: DefaultFocusManager() {
-    private val frame: MainWindow
+class MainWindowController : DefaultFocusManager() {
+    private val frame = MainWindow("JSON logviewer")
+
     init {
-        frame = MainWindow("JSON logviewer")
         frame.isVisible = true
         KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(this)
     }
 
-    fun loadFile() {
+    private fun loadFile() {
         val fileChooser = JFileChooser()
         fileChooser.showOpenDialog(frame)
         if (fileChooser.selectedFile.isFile && fileChooser.selectedFile != null) {
