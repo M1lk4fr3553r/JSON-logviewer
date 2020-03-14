@@ -16,7 +16,7 @@ class MainWindowController: DefaultFocusManager() {
     }
 
     override fun dispatchKeyEvent(e: KeyEvent?): Boolean {
-        if (e?.id == KeyEvent.KEY_RELEASED && frame.isActive) {
+        if (frame.isActive && e?.id == KeyEvent.KEY_RELEASED && !frame.filterField.hasFocus()) {
             println(e.keyCode)
             when (e.keyCode) {
                 // l
@@ -24,6 +24,9 @@ class MainWindowController: DefaultFocusManager() {
                     val fileChooser = JFileChooser()
                     fileChooser.showOpenDialog(frame)
                     frame.list.setListData(JSONParser.parse(fileChooser.selectedFile))
+                    return true
+                }
+                70 -> {
                     return true
                 }
                 // ENTER
