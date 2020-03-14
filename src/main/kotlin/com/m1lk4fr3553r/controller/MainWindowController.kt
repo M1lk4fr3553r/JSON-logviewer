@@ -15,15 +15,21 @@ class MainWindowController: DefaultFocusManager() {
         KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(this)
     }
 
+    fun loadFile() {
+        val fileChooser = JFileChooser()
+        fileChooser.showOpenDialog(frame)
+        if (fileChooser.selectedFile.isFile && fileChooser.selectedFile != null) {
+            frame.list.setListData(JSONParser.parse(fileChooser.selectedFile))
+        }
+    }
+
     override fun dispatchKeyEvent(e: KeyEvent?): Boolean {
         if (frame.isActive && e?.id == KeyEvent.KEY_RELEASED && !frame.filterField.hasFocus()) {
             println(e.keyCode)
             when (e.keyCode) {
                 // l
                 76 -> {
-                    val fileChooser = JFileChooser()
-                    fileChooser.showOpenDialog(frame)
-                    frame.list.setListData(JSONParser.parse(fileChooser.selectedFile))
+                    loadFile()
                     return true
                 }
                 70 -> {
