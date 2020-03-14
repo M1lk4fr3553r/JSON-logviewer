@@ -3,14 +3,11 @@ package com.m1lk4fr3553r.model
 
 class JSONListItem {
     val items = mutableMapOf<String, String>()
-
-    init {
-        items.put("level", "INFO")
-        items.put("message", "message.......")
-        items.put("timestamp", "time")
-    }
+    var timestampKey: String = "timestamp"
+    var levelKey: String = "level"
+    var messageKey: String = "message"
 
     override fun toString(): String {
-        return "${items.get("timestamp")}   ${items.get("level")}    ${items.get("message")}"
+        return "${items.get(timestampKey)}   ${items.get(levelKey)}    ${items.get(messageKey)}"
     }
 }
