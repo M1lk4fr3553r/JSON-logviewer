@@ -15,12 +15,12 @@ class ItemView(item: JSONListItem, parent: JFrame) : JFrame() {
         controller = ItemViewController(this)
         title = item.toString()
         defaultCloseOperation = DISPOSE_ON_CLOSE
-        setSize(1920 / 3, 1080 / 3)
         setLocationRelativeTo(parent)
-        isVisible = true
 
-        textArea = JTextArea(StringEscapeUtils.unescapeJava(item.json.toString(2) ))
+        textArea = JTextArea(StringEscapeUtils.unescapeJava(item.json.toString(2)))
         textArea.isEditable = false
         add(JScrollPane(textArea))
+        setSize(textArea.preferredSize) // TODO("Not the best solution")
+        isVisible = true
     }
 }
