@@ -18,6 +18,7 @@ class MainWindowController : DefaultFocusManager() {
         KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(this)
         frame.filterField.addKeyListener(FilterKeyListener(::filter, ::resetFilter))
         frame.searchField.addKeyListener(FilterKeyListener(::search, ::resetSearch))
+        frame.list.addMouseListener(MainWindowMouseAdapter(frame))
     }
 
     private fun loadFileWithOpenDialog() {
@@ -66,7 +67,7 @@ class MainWindowController : DefaultFocusManager() {
 
     override fun dispatchKeyEvent(e: KeyEvent?): Boolean {
         if (frame.isActive && e?.id == KeyEvent.KEY_RELEASED && !frame.filterField.hasFocus() && !frame.searchField.hasFocus()) {
-            println(e.keyCode)
+//            println(e.keyCode)
             when (e.keyCode) {
                 // ENTER
                 10 -> {
