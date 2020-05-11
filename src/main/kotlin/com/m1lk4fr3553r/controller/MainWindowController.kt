@@ -1,5 +1,6 @@
 package com.m1lk4fr3553r.controller
 
+import com.m1lk4fr3553r.Util
 import com.m1lk4fr3553r.model.JSONListItem
 import com.m1lk4fr3553r.view.ItemView
 import com.m1lk4fr3553r.view.MainWindow
@@ -22,9 +23,13 @@ class MainWindowController : DefaultFocusManager() {
     }
 
     private fun loadFileWithOpenDialog() {
-        val fileChooser = JFileChooser()
+        val properties = Util.getProperties()
+        val lastPath = properties.getProperty("path.last", "%userhome%")
+        val fileChooser = JFileChooser(lastPath)
         fileChooser.showOpenDialog(frame)
-        if (fileChooser.selectedFile.isFile && fileChooser.selectedFile != null) {
+        if (fileChooser.selectedFile != null && fileChooser.selectedFile.isFile) {
+            properties.setProperty("path.last", fileChooser.selectedFile.parent)
+            Util.saveProperties(properties)
             loadedData = JSONParser.parse(fileChooser.selectedFile)
             frame.list.setListData(loadedData)
         }

@@ -13,5 +13,10 @@ class Util {
             prop.load(stream)
             return prop
         }
+
+        fun saveProperties(properties: Properties) {
+            val stream = FileOutputStream(File(File(Util::class.java.getProtectionDomain().getCodeSource().getLocation().toURI()).parent + File.separator + "JSONlogviewer.properties"))
+            properties.store(stream, "")
+        }
     }
 }
