@@ -14,6 +14,7 @@ import javax.swing.JFileChooser
 class MainWindowController : DefaultFocusManager() {
     private val frame = MainWindow("JSON logviewer")
     private var loadedData = emptyArray<JSONListItem>()
+    private var displayedData = loadedData
 
     init {
         frame.isVisible = true
@@ -46,6 +47,7 @@ class MainWindowController : DefaultFocusManager() {
             try {
                 loadedData = JSONParser.parse(file)
                 frame.list.setListData(loadedData)
+                displayedData = loadedData
 
                 // Store selected file to Properties
                 val properties = Util.getProperties()
@@ -61,17 +63,19 @@ class MainWindowController : DefaultFocusManager() {
     private fun filter() {
         val filtered: List<JSONListItem> = loadedData.filter { it.raw.contains(frame.filterField.text.toLowerCase()) }
         frame.list.setListData(filtered.toTypedArray())
+        displayedData = filtered.toTypedArray()
         frame.list.requestFocus()
     }
 
     private fun resetFilter() {
         frame.filterField.text = ""
         frame.list.setListData(loadedData)
+        displayedData = loadedData
         frame.list.requestFocus()
     }
 
     private fun search() {
-        val results = loadedData.filter { it.raw.contains(frame.searchField.text.toLowerCase()) }.map { loadedData.indexOf(it) }
+        val results = displayedData.filter { it.raw.contains(frame.searchField.text.toLowerCase()) }.map { displayedData.indexOf(it) }
         for (i in results) {
             if (i > frame.list.selectedIndex) {
                 frame.list.setSelectedValue(frame.list.model.getElementAt(i), true)
