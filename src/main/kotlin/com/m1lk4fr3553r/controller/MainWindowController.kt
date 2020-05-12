@@ -87,29 +87,44 @@ class MainWindowController : DefaultFocusManager() {
 
     override fun dispatchKeyEvent(e: KeyEvent?): Boolean {
         if (frame.isActive && e?.id == KeyEvent.KEY_RELEASED && !frame.filterField.hasFocus() && !frame.searchField.hasFocus()) {
-//            println(e.keyCode)
-            when (e.keyCode) {
-                // ENTER
-                10 -> {
-                    ItemView(frame.list.selectedValue, frame)
-                    return true
+            println(e.keyCode)
+            if (e.isControlDown) {
+                when (e.keyCode) {
+                    // ENTER
+                    10 -> {
+                        ItemView(frame.list.selectedValue, frame)
+                        return true
+                    }
+                    // CTRL + F
+                    70 -> {
+                        frame.filterField.requestFocus()
+                        return true
+                    }
+                    // CTRL + O
+                    79 -> {
+                        loadFileWithOpenDialog()
+                        return true
+                    }
+                    // CTRL + S
+                    83 -> {
+                        frame.searchField.requestFocus()
+                        return true
+                    }
+                    else -> return false
                 }
-                // F
-                70 -> {
-                    frame.filterField.requestFocus()
-                    return true
+            } else {
+                when (e.keyCode) {
+                    // ENTER
+                    10 -> {
+                        if (frame.list.selectedValue != null) {
+                            ItemView(frame.list.selectedValue, frame)
+                            return true
+                        } else {
+                            return false
+                        }
+                    }
+                    else -> return false
                 }
-                // L
-                76 -> {
-                    loadFileWithOpenDialog()
-                    return true
-                }
-                // S
-                83 -> {
-                    frame.searchField.requestFocus()
-                    return true
-                }
-                else -> return false
             }
         }
         return false
