@@ -4,7 +4,9 @@ import com.m1lk4fr3553r.Util
 import com.m1lk4fr3553r.model.JSONListItem
 import com.m1lk4fr3553r.view.ItemView
 import com.m1lk4fr3553r.view.MainWindow
+import com.m1lk4fr3553r.view.MainWindowMenuBar
 import org.json.JSONException
+import java.awt.Desktop
 import java.awt.KeyboardFocusManager
 import java.awt.event.KeyEvent
 import java.io.File
@@ -17,6 +19,7 @@ class MainWindowController : DefaultFocusManager() {
     private var displayedData = loadedData
 
     init {
+        frame.jMenuBar = MainWindowMenuBar(this)
         frame.isVisible = true
         KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(this)
         frame.filterField.addKeyListener(FilterKeyListener(::filter, ::resetFilter))
@@ -25,7 +28,7 @@ class MainWindowController : DefaultFocusManager() {
         loadFile(Util.getProperties().getProperty("path.last", ""))
     }
 
-    private fun loadFileWithOpenDialog() {
+    fun loadFileWithOpenDialog() {
         //Load last opened file
         val properties = Util.getProperties()
         val lastPath = properties.getProperty("path.last", "%userhome%")
@@ -36,7 +39,6 @@ class MainWindowController : DefaultFocusManager() {
             loadFile(fileChooser.selectedFile)
         }
     }
-
 
     fun loadFile(path: String) {
         loadFile(File(path))
@@ -60,6 +62,15 @@ class MainWindowController : DefaultFocusManager() {
         }
     }
 
+    fun openSettings() {
+        val desktop = Desktop.getDesktop()
+        desktop.open(Util.getPropertiesFile())
+    }
+
+    fun requestFilter() {
+        frame.filterField.requestFocus()
+    }
+
     private fun filter() {
         val filtered: List<JSONListItem> = loadedData.filter { it.raw.contains(frame.filterField.text.toLowerCase()) }
         frame.list.setListData(filtered.toTypedArray())
@@ -72,6 +83,10 @@ class MainWindowController : DefaultFocusManager() {
         frame.list.setListData(loadedData)
         displayedData = loadedData
         frame.list.requestFocus()
+    }
+
+    fun requestSearch() {
+        frame.searchField.requestFocus()
     }
 
     private fun search() {
@@ -101,7 +116,7 @@ class MainWindowController : DefaultFocusManager() {
                     }
                     // CTRL + F
                     70 -> {
-                        frame.filterField.requestFocus()
+                        requestFilter()
                         return true
                     }
                     // CTRL + O
@@ -111,7 +126,7 @@ class MainWindowController : DefaultFocusManager() {
                     }
                     // CTRL + S
                     83 -> {
-                        frame.searchField.requestFocus()
+                        requestSearch()
                         return true
                     }
                     else -> return false

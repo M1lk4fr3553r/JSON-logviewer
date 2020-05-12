@@ -12,12 +12,20 @@ class Util {
             val stream = FileInputStream(File(File(Util::class.java.getProtectionDomain().getCodeSource().getLocation().toURI()).parent + File.separator + "JSONlogviewer.properties"))
             val prop = Properties()
             prop.load(stream)
+            stream.close()
             return prop
+        }
+
+        fun getPropertiesFile(): File {
+            return File(File(Util::class.java.getProtectionDomain().getCodeSource().getLocation().toURI()).parent + File.separator + "JSONlogviewer.properties")
         }
 
         fun saveProperties(properties: Properties) {
             val stream = FileOutputStream(File(File(Util::class.java.getProtectionDomain().getCodeSource().getLocation().toURI()).parent + File.separator + "JSONlogviewer.properties"))
-            properties.store(stream, "")
+            val sortedProperties = SortedProperties()
+            sortedProperties.putAll(properties)
+            sortedProperties.store(stream, null)
+            stream.close()
         }
     }
 }
