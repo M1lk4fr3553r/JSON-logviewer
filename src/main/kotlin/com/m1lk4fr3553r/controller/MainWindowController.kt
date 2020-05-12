@@ -60,6 +60,10 @@ class MainWindowController : DefaultFocusManager() {
         }
     }
 
+    fun requestFilter() {
+        frame.filterField.requestFocus()
+    }
+
     private fun filter() {
         val filtered: List<JSONListItem> = loadedData.filter { it.raw.contains(frame.filterField.text.toLowerCase()) }
         frame.list.setListData(filtered.toTypedArray())
@@ -72,6 +76,10 @@ class MainWindowController : DefaultFocusManager() {
         frame.list.setListData(loadedData)
         displayedData = loadedData
         frame.list.requestFocus()
+    }
+
+    fun requestSearch() {
+        frame.searchField.requestFocus()
     }
 
     private fun search() {
@@ -101,7 +109,7 @@ class MainWindowController : DefaultFocusManager() {
                     }
                     // CTRL + F
                     70 -> {
-                        frame.filterField.requestFocus()
+                        requestFilter()
                         return true
                     }
                     // CTRL + O
@@ -111,7 +119,7 @@ class MainWindowController : DefaultFocusManager() {
                     }
                     // CTRL + S
                     83 -> {
-                        frame.searchField.requestFocus()
+                        requestSearch()
                         return true
                     }
                     else -> return false
