@@ -4,6 +4,7 @@ import com.m1lk4fr3553r.Util
 import com.m1lk4fr3553r.model.JSONListItem
 import com.m1lk4fr3553r.view.ItemView
 import com.m1lk4fr3553r.view.MainWindow
+import com.m1lk4fr3553r.view.MainWindowMenuBar
 import org.json.JSONException
 import java.awt.KeyboardFocusManager
 import java.awt.event.KeyEvent
@@ -17,6 +18,7 @@ class MainWindowController : DefaultFocusManager() {
     private var displayedData = loadedData
 
     init {
+        frame.jMenuBar = MainWindowMenuBar(this)
         frame.isVisible = true
         KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(this)
         frame.filterField.addKeyListener(FilterKeyListener(::filter, ::resetFilter))
@@ -25,7 +27,7 @@ class MainWindowController : DefaultFocusManager() {
         loadFile(Util.getProperties().getProperty("path.last", ""))
     }
 
-    private fun loadFileWithOpenDialog() {
+    fun loadFileWithOpenDialog() {
         //Load last opened file
         val properties = Util.getProperties()
         val lastPath = properties.getProperty("path.last", "%userhome%")
@@ -36,7 +38,6 @@ class MainWindowController : DefaultFocusManager() {
             loadFile(fileChooser.selectedFile)
         }
     }
-
 
     fun loadFile(path: String) {
         loadFile(File(path))
