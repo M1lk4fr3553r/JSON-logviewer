@@ -4,6 +4,7 @@ import com.m1lk4fr3553r.Util
 import com.m1lk4fr3553r.model.JSONListItem
 import com.m1lk4fr3553r.view.ItemView
 import com.m1lk4fr3553r.view.MainWindow
+import org.json.JSONException
 import java.awt.KeyboardFocusManager
 import java.awt.event.KeyEvent
 import java.io.File
@@ -20,26 +21,40 @@ class MainWindowController : DefaultFocusManager() {
         frame.filterField.addKeyListener(FilterKeyListener(::filter, ::resetFilter))
         frame.searchField.addKeyListener(FilterKeyListener(::search, ::resetSearch))
         frame.list.addMouseListener(MainWindowMouseAdapter(frame))
+        loadFile(Util.getProperties().getProperty("path.last", ""))
     }
 
     private fun loadFileWithOpenDialog() {
+        //Load last opened file
         val properties = Util.getProperties()
         val lastPath = properties.getProperty("path.last", "%userhome%")
+
         val fileChooser = JFileChooser(lastPath)
         fileChooser.showOpenDialog(frame)
-        if (fileChooser.selectedFile != null && fileChooser.selectedFile.isFile) {
-            properties.setProperty("path.last", fileChooser.selectedFile.parent)
-            Util.saveProperties(properties)
-            loadedData = JSONParser.parse(fileChooser.selectedFile)
-            frame.list.setListData(loadedData)
+        if (fileChooser.selectedFile != null) {
+            loadFile(fileChooser.selectedFile)
         }
     }
 
+
     fun loadFile(path: String) {
-        val file = File(path)
+        loadFile(File(path))
+    }
+
+    fun loadFile(file: File) {
         if (file.isFile) {
-            loadedData = JSONParser.parse(file)
-            frame.list.setListData(loadedData)
+            try {
+                loadedData = JSONParser.parse(file)
+                frame.list.setListData(loadedData)
+
+                // Store selected file to Properties
+                val properties = Util.getProperties()
+                properties.setProperty("path.last", file.absolutePath)
+                Util.saveProperties(properties)
+            } catch (exception: JSONException) {
+                System.err.println("Not a valid JSON-Log")
+                exception.printStackTrace()
+            }
         }
     }
 
