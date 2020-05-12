@@ -2,6 +2,7 @@ package com.m1lk4fr3553r.view
 
 import com.m1lk4fr3553r.controller.ItemViewController
 import com.m1lk4fr3553r.model.JSONListItem
+import com.m1lk4fr3553r.plus
 import org.apache.commons.text.StringEscapeUtils
 import javax.swing.JFrame
 import javax.swing.JScrollPane
@@ -15,12 +16,12 @@ class ItemView(item: JSONListItem, parent: JFrame) : JFrame() {
         controller = ItemViewController(this)
         title = item.toString()
         defaultCloseOperation = DISPOSE_ON_CLOSE
-        setLocationRelativeTo(parent)
 
         textArea = JTextArea(StringEscapeUtils.unescapeJava(item.json.toString(2)))
         textArea.isEditable = false
         add(JScrollPane(textArea))
-        setSize(textArea.preferredSize) // TODO("Not the best solution")
+        size = textArea.preferredSize.plus(50)
+        setLocationRelativeTo(parent)
         isVisible = true
     }
 }

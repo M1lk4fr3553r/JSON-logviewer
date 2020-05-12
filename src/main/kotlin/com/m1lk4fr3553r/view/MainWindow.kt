@@ -1,6 +1,5 @@
 package com.m1lk4fr3553r.view
 
-import com.m1lk4fr3553r.controller.FilterKeyListener
 import com.m1lk4fr3553r.model.JSONListItem
 import java.awt.BorderLayout
 import javax.swing.*
