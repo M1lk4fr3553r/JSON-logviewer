@@ -1,5 +1,6 @@
 package com.m1lk4fr3553r
 
+import java.awt.Dimension
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
@@ -19,4 +20,10 @@ class Util {
             properties.store(stream, "")
         }
     }
+}
+
+fun Dimension.plus(other:Int): Dimension {
+    this.width += other
+    this.height += other
+    return this
 }
