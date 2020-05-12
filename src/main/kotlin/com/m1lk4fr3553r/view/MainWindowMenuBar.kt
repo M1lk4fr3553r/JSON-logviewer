@@ -21,6 +21,10 @@ class MainWindowMenuBar(controller: MainWindowController): JMenuBar() {
         openItem.addActionListener { controller.loadFileWithOpenDialog() }
         fileMenu.add(openItem)
 
+        val settingsIcon = JMenuItem("Settings")
+        settingsIcon.addActionListener { controller.openSettings() }
+        fileMenu.add(settingsIcon)
+
         val exitItem = JMenuItem("Exit")
         exitItem.addActionListener { exitProcess(0) }
         fileMenu.add(exitItem)

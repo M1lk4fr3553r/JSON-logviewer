@@ -6,6 +6,7 @@ import com.m1lk4fr3553r.view.ItemView
 import com.m1lk4fr3553r.view.MainWindow
 import com.m1lk4fr3553r.view.MainWindowMenuBar
 import org.json.JSONException
+import java.awt.Desktop
 import java.awt.KeyboardFocusManager
 import java.awt.event.KeyEvent
 import java.io.File
@@ -59,6 +60,11 @@ class MainWindowController : DefaultFocusManager() {
                 exception.printStackTrace()
             }
         }
+    }
+
+    fun openSettings() {
+        val desktop = Desktop.getDesktop()
+        desktop.open(Util.getPropertiesFile())
     }
 
     fun requestFilter() {
