@@ -1,6 +1,6 @@
 package com.m1lk4fr3553r.controller
 
-import com.m1lk4fr3553r.Util
+import com.m1lk4fr3553r.util.Util
 import com.m1lk4fr3553r.model.JSONListItem
 import com.m1lk4fr3553r.view.ItemView
 import com.m1lk4fr3553r.view.MainWindow
@@ -55,6 +55,7 @@ class MainWindowController : DefaultFocusManager() {
                 val properties = Util.getProperties()
                 properties.setProperty("path.last", file.absolutePath)
                 Util.saveProperties(properties)
+                Util.watchForChanges(file, this)
             } catch (exception: JSONException) {
                 System.err.println("Not a valid JSON-Log")
                 exception.printStackTrace()

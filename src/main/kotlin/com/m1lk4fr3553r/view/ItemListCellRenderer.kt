@@ -1,6 +1,6 @@
 package com.m1lk4fr3553r.view
 
-import com.m1lk4fr3553r.Util
+import com.m1lk4fr3553r.util.Util
 import com.m1lk4fr3553r.model.JSONListItem
 import java.awt.Color
 import java.awt.Component
