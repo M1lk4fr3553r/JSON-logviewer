@@ -14,7 +14,7 @@ import java.util.*
 class Util {
     companion object {
         fun getProperties(): Properties {
-            val stream = FileInputStream(File(File(Util::class.java.getProtectionDomain().getCodeSource().getLocation().toURI()).parent + File.separator + "JSONlogviewer.properties"))
+            if (properties == null) {
             val prop = Properties()
             prop.load(stream)
             stream.close()
@@ -26,7 +26,7 @@ class Util {
         }
 
         fun saveProperties(properties: Properties) {
-            val stream = FileOutputStream(File(File(Util::class.java.getProtectionDomain().getCodeSource().getLocation().toURI()).parent + File.separator + "JSONlogviewer.properties"))
+            val stream = FileOutputStream(getPropertiesFile())
             val sortedProperties = SortedProperties()
             sortedProperties.putAll(properties)
             sortedProperties.store(stream, null)
