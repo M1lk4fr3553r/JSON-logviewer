@@ -39,7 +39,7 @@ class Util {
             GlobalScope.launch {
                 watchChannel.consumeEach {
                     if (it.file == file) {
-                        controller.loadFile(file)
+                        controller.loadFile(file, false)
                         watchChannel.close()
                     }
                 }
