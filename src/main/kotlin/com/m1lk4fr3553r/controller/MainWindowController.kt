@@ -36,25 +36,26 @@ class MainWindowController : DefaultFocusManager() {
         val fileChooser = JFileChooser(lastPath)
         fileChooser.showOpenDialog(frame)
         if (fileChooser.selectedFile != null) {
-            loadFile(fileChooser.selectedFile)
+            loadFile(fileChooser.selectedFile, true)
         }
     }
 
     fun loadFile(path: String) {
-        loadFile(File(path))
+        loadFile(File(path), false)
     }
 
-    fun loadFile(file: File) {
+    fun loadFile(file: File, updateLocation: Boolean) {
         if (file.isFile) {
             try {
                 loadedData = JSONParser.parse(file).reversedArray()
                 frame.list.setListData(loadedData)
                 displayedData = loadedData
-
-                // Store selected file to Properties
-                val properties = Util.getProperties()
-                properties.setProperty("path.last", file.absolutePath)
-                Util.saveProperties(properties)
+                if (updateLocation) {
+                    // Store selected file to Properties
+                    val properties = Util.getProperties()
+                    properties.setProperty("path.last", file.absolutePath)
+                    Util.saveProperties(properties)
+                }
                 Util.watchForChanges(file, this)
             } catch (exception: JSONException) {
                 System.err.println("Not a valid JSON-Log")
