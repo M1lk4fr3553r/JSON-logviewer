@@ -4,9 +4,9 @@
 Launches the logviewer and optionally loads a file
 
 ## Hotkeys
-`l`: Load a file  
-`f`: Filter entries  
-`s`: Search in entries  
+`CTRL + O`: Load a file  
+`CTRL + F`: Filter entries  
+`CTRL + S`: Search in entries  
 
 ## Options
 ### Log-Keys
