@@ -1,11 +1,10 @@
 package com.m1lk4fr3553r.controller
 
-import com.m1lk4fr3553r.Util
+import com.m1lk4fr3553r.util.Util
 import com.m1lk4fr3553r.model.JSONListItem
 import org.json.JSONObject
 import org.json.JSONTokener
 import java.io.File
-import java.util.*
 
 class JSONParser {
     companion object {
