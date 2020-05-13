@@ -47,7 +47,7 @@ class MainWindowController : DefaultFocusManager() {
     fun loadFile(file: File) {
         if (file.isFile) {
             try {
-                loadedData = JSONParser.parse(file)
+                loadedData = JSONParser.parse(file).reversedArray()
                 frame.list.setListData(loadedData)
                 displayedData = loadedData
 
