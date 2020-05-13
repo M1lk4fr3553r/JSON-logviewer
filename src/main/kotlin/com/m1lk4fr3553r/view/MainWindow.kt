@@ -13,7 +13,7 @@ class MainWindow(title: String) : JFrame() {
 
     init {
         initWindow(title)
-        list.cellRenderer = ItemListCellRenderer()
+        list.cellRenderer = ItemListCellRenderer(this)
         scrollPane = JScrollPane(list)
         add(scrollPane)
         statusBar.add(JLabel("Filter:"))
