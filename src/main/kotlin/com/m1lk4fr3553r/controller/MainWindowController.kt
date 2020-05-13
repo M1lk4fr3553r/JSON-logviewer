@@ -100,11 +100,13 @@ class MainWindowController : DefaultFocusManager() {
                 break
             }
         }
+        frame.list.repaint()
     }
 
     private fun resetSearch() {
         frame.searchField.text = ""
         frame.list.requestFocus()
+        frame.list.repaint()
     }
 
     override fun dispatchKeyEvent(e: KeyEvent?): Boolean {
