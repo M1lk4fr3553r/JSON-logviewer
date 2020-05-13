@@ -4,7 +4,6 @@ import com.m1lk4fr3553r.util.Util
 import com.m1lk4fr3553r.model.JSONListItem
 import java.awt.Color
 import java.awt.Component
-import java.time.LocalDateTime
 import javax.swing.DefaultListCellRenderer
 import javax.swing.JList
 
