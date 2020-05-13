@@ -25,6 +25,7 @@ class MainWindowController : DefaultFocusManager() {
         frame.filterField.addKeyListener(FilterKeyListener(::filter, ::resetFilter))
         frame.searchField.addKeyListener(FilterKeyListener(::search, ::resetSearch))
         frame.list.addMouseListener(MainWindowMouseAdapter(frame))
+        Util.watchProperties()
         loadFile(Util.getProperties().getProperty("path.last", ""))
     }
 

@@ -8,18 +8,12 @@ import javax.swing.DefaultListCellRenderer
 import javax.swing.JList
 
 class ItemListCellRenderer : DefaultListCellRenderer() {
-    val infoColor: Color
-    val warnColor: Color
-    val errorColor: Color
-    val debugColor: Color
-    init {
-        val props = Util.getProperties()
-        infoColor = Color.decode(props.getProperty("color.info", "#000000"))
-        warnColor = Color.decode(props.getProperty("color.warn", "#0000FF"))
-        errorColor = Color.decode(props.getProperty("color.error", "#FF0000"))
-        debugColor = Color.decode(props.getProperty("color.debug", "#00FF00"))
-    }
     override fun getListCellRendererComponent(list: JList<*>?, value: Any?, index: Int, isSelected: Boolean, cellHasFocus: Boolean): Component {
+        val props = Util.getProperties()
+        val infoColor = Color.decode(props.getProperty("color.info", "#000000"))
+        val warnColor = Color.decode(props.getProperty("color.warn", "#ada401"))
+        val errorColor = Color.decode(props.getProperty("color.error", "#aa0000"))
+        val debugColor = Color.decode(props.getProperty("color.debug", "#0037dd"))
         val item = (value as JSONListItem)
         val component = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus)
         when (item.items.get(item.levelKey)) {

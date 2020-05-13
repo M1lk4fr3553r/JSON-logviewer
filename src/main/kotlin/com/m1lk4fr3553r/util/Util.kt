@@ -13,12 +13,33 @@ import java.util.*
 
 class Util {
     companion object {
+        private var properties: Properties? = null
+
         fun getProperties(): Properties {
-            val stream = FileInputStream(File(File(Util::class.java.getProtectionDomain().getCodeSource().getLocation().toURI()).parent + File.separator + "JSONlogviewer.properties"))
+            if (properties == null) {
+                loadProperties()
+            }
+            return properties as Properties
+        }
+
+        fun watchProperties() {
+            val file = getPropertiesFile()
+            val watchChannel = file.asWatchChannel()
+            GlobalScope.launch {
+                watchChannel.consumeEach {
+                    if (it.file == file) {
+                        loadProperties()
+                    }
+                }
+            }
+        }
+
+        private fun loadProperties() {
+            val stream = FileInputStream(getPropertiesFile())
             val prop = Properties()
             prop.load(stream)
             stream.close()
-            return prop
+            properties = prop
         }
 
         fun getPropertiesFile(): File {
@@ -26,7 +47,7 @@ class Util {
         }
 
         fun saveProperties(properties: Properties) {
-            val stream = FileOutputStream(File(File(Util::class.java.getProtectionDomain().getCodeSource().getLocation().toURI()).parent + File.separator + "JSONlogviewer.properties"))
+            val stream = FileOutputStream(getPropertiesFile())
             val sortedProperties = SortedProperties()
             sortedProperties.putAll(properties)
             sortedProperties.store(stream, null)
