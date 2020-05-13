@@ -2,7 +2,7 @@ package com.m1lk4fr3553r.view
 
 import com.m1lk4fr3553r.controller.ItemViewController
 import com.m1lk4fr3553r.model.JSONListItem
-import com.m1lk4fr3553r.plus
+import com.m1lk4fr3553r.util.plus
 import org.apache.commons.text.StringEscapeUtils
 import javax.swing.JFrame
 import javax.swing.JScrollPane
