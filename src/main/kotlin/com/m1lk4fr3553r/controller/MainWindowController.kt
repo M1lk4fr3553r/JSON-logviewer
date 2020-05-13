@@ -55,6 +55,7 @@ class MainWindowController : DefaultFocusManager() {
                 val properties = Util.getProperties()
                 properties.setProperty("path.last", file.absolutePath)
                 Util.saveProperties(properties)
+                Util.watchForChanges(file, this)
             } catch (exception: JSONException) {
                 System.err.println("Not a valid JSON-Log")
                 exception.printStackTrace()
