@@ -1,4 +1,4 @@
-package com.m1lk4fr3553r
+package com.m1lk4fr3553r.model
 
 import java.util.*
 
