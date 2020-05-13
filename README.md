@@ -19,6 +19,7 @@ Launches the logviewer and optionally loads a file
 - `color.warn=#ada401`: Sets the warning color
 - `color.error=#aa0000`: Sets the error color
 - `color.debug=#0037dd` Sets the debug color
+- `color.search=#9c9e67` Sets the search highlight color
 
 ### Other
-- `path.last=`: Stores the last opened path, you generally dont need to touch this option
+- `path.last=`: Stores the last opened path, you generally don't need to touch this option
