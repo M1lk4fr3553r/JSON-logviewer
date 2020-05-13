@@ -6,7 +6,7 @@
 
     <groupId>com.m1lk4fr3553r</groupId>
     <artifactId>json-logviewer</artifactId>
-    <version>1.1</version>
+    <version>1.2</version>
     <packaging>jar</packaging>
 
     <properties>
