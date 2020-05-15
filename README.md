@@ -1,3 +1,6 @@
+Buy me a coffee via PayPal: [![Donate via PayPal](https://www.paypalobjects.com/webstatic/de_DE/i/de-pp-logo-100px.png)](http://paypal.me/m1lk4fr3553r)
+<hr>
+
 # JSON-logviewer
 ## Command line arguments
 `JSON-logviewer [file]`  
@@ -18,8 +21,8 @@ Launches the logviewer and optionally loads a file
 - `color.info=#000000`: Sets the info color
 - `color.warn=#ada401`: Sets the warning color
 - `color.error=#aa0000`: Sets the error color
-- `color.debug=#0037dd` Sets the debug color
-- `color.search=#9c9e67` Sets the search highlight color
+- `color.debug=#0037dd`: Sets the debug color
+- `color.search=#9c9e67`: Sets the search highlight color
 
 ### Other
 - `path.last=`: Stores the last opened path, you generally don't need to touch this option

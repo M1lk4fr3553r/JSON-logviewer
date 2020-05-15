@@ -6,7 +6,7 @@
 
     <groupId>com.m1lk4fr3553r</groupId>
     <artifactId>json-logviewer</artifactId>
-    <version>1.2</version>
+    <version>1.3</version>
     <packaging>jar</packaging>
 
     <properties>
@@ -14,6 +14,11 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>com.m1lk4fr3553r</groupId>
+            <artifactId>github-updater</artifactId>
+            <version>1.0</version>
+        </dependency>
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
@@ -67,7 +72,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <jvmTarget>1.8</jvmTarget>
+                    <jvmTarget>9</jvmTarget>
                 </configuration>
             </plugin>
 
