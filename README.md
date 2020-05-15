@@ -1,3 +1,6 @@
+Buy me a coffee via PayPal: [![Donate via PayPal](https://www.paypalobjects.com/webstatic/de_DE/i/de-pp-logo-100px.png)](http://paypal.me/m1lk4fr3553r)
+<hr>
+
 # JSON-logviewer
 ## Command line arguments
 `JSON-logviewer [file]`  
@@ -23,3 +26,4 @@ Launches the logviewer and optionally loads a file
 
 ### Other
 - `path.last=`: Stores the last opened path, you generally don't need to touch this option
+<hr>
