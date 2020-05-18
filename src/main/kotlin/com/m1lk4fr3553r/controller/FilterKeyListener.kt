@@ -3,15 +3,7 @@ package com.m1lk4fr3553r.controller
 import java.awt.event.KeyEvent
 import java.awt.event.KeyListener
 
-class FilterKeyListener(filterFunction: () -> Unit, resetFunction: () -> Unit): KeyListener {
-    val filterFunction: () -> Unit
-    val resetFunction: () -> Unit
-
-    init {
-        this.filterFunction = filterFunction
-        this.resetFunction = resetFunction
-    }
-
+class FilterKeyListener(val filterFunction: () -> Unit,val  resetFunction: () -> Unit): KeyListener {
     override fun keyTyped(p0: KeyEvent?) {
     }
 

@@ -6,10 +6,10 @@ import javax.swing.*
 
 class MainWindow(title: String) : JFrame() {
     val list = JList<JSONListItem>()
-    val scrollPane: JScrollPane
-    val statusBar = JToolBar()
     val filterField = JTextField()
     val searchField = JTextField()
+    private val scrollPane: JScrollPane
+    private val statusBar = JToolBar()
 
     init {
         initWindow(title)

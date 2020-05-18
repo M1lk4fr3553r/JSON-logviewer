@@ -7,17 +7,13 @@ import java.awt.event.MouseEvent
 import javax.swing.JFrame
 import javax.swing.JList
 
-class MainWindowMouseAdapter(parent: JFrame): MouseAdapter() {
-    val parent: JFrame
+class MainWindowMouseAdapter(private val parent: JFrame): MouseAdapter() {
 
-    init {
-        this.parent = parent
-    }
     override fun mouseClicked(e: MouseEvent?) {
-        val list = e?.source as JList<JSONListItem>
+        val list = e?.source as JList<*>
         if (e.clickCount == 2) {
             val index = list.locationToIndex(e.point)
-            ItemView(list.model.getElementAt(index), parent)
+            ItemView(list.model.getElementAt(index) as JSONListItem, parent)
         }
     }
 }

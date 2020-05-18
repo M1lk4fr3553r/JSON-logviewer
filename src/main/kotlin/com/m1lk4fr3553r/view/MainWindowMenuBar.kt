@@ -6,10 +6,8 @@ import javax.swing.JMenuBar
 import javax.swing.JMenuItem
 import kotlin.system.exitProcess
 
-class MainWindowMenuBar(controller: MainWindowController): JMenuBar() {
-    val controller: MainWindowController
+class MainWindowMenuBar(private val controller: MainWindowController): JMenuBar() {
     init {
-        this.controller = controller
         initFileMenu()
         initEditMenu()
     }

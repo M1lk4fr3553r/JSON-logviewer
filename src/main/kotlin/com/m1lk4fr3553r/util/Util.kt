@@ -27,7 +27,7 @@ class Util {
             val watchChannel = file.asWatchChannel()
             GlobalScope.launch {
                 watchChannel.consumeEach {
-                    if (it.file == file) {
+                    if (it.file == file && file.exists()) {
                         loadProperties()
                     }
                 }
@@ -43,7 +43,7 @@ class Util {
         }
 
         fun getPropertiesFile(): File {
-            return File(File(Util::class.java.getProtectionDomain().getCodeSource().getLocation().toURI()).parent + File.separator + "JSONlogviewer.properties")
+            return File(File(Util::class.java.protectionDomain.codeSource.location.toURI()).parent + File.separator + "JSONlogviewer.properties")
         }
 
         fun saveProperties(properties: Properties) {
