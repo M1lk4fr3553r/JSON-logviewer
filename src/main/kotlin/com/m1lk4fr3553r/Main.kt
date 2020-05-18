@@ -13,7 +13,7 @@ fun main(args: Array<String>) {
             .checkForUpdate("v1.3")
 
     val stream = Util::class.java.classLoader.getResourceAsStream("_JSONlogviewer.properties")
-    val outfile = File(File(Util::class.java.getProtectionDomain().getCodeSource().getLocation().toURI()).parent + File.separator + "JSONlogviewer.properties")
+    val outfile = Util.getPropertiesFile()
     if (!outfile.exists() && stream != null) {
         FileOutputStream(outfile).write(stream.readAllBytes())
     }
@@ -24,7 +24,7 @@ fun main(args: Array<String>) {
     }
 }
 
-class UpdaterCallback(): GitHubUpdaterCallback {
+class UpdaterCallback : GitHubUpdaterCallback {
     override fun checkUpdateCallback(updateFound: Boolean) {
         if (updateFound) {
             println("Update found, starting download...")

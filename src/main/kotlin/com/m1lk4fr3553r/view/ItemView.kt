@@ -9,11 +9,10 @@ import javax.swing.JScrollPane
 import javax.swing.JTextArea
 
 class ItemView(item: JSONListItem, parent: JFrame) : JFrame() {
-    private val controller: ItemViewController
+    private val controller = ItemViewController(this)
     private val textArea: JTextArea
 
     init {
-        controller = ItemViewController(this)
         title = item.toString()
         defaultCloseOperation = DISPOSE_ON_CLOSE
 
