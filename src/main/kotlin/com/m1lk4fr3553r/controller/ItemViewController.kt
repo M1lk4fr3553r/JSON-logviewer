@@ -6,10 +6,9 @@ import java.awt.event.KeyEvent
 import javax.swing.DefaultFocusManager
 
 class ItemViewController(view: ItemView) : DefaultFocusManager() {
-    private val itemView: ItemView
+    private val itemView: ItemView = view
 
     init {
-        itemView = view
         KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(this)
     }
 

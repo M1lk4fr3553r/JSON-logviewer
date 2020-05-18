@@ -43,7 +43,7 @@ class Util {
         }
 
         fun getPropertiesFile(): File {
-            return File(File(Util::class.java.getProtectionDomain().getCodeSource().getLocation().toURI()).parent + File.separator + "JSONlogviewer.properties")
+            return File(File(Util::class.java.protectionDomain.codeSource.location.toURI()).parent + File.separator + "JSONlogviewer.properties")
         }
 
         fun saveProperties(properties: Properties) {

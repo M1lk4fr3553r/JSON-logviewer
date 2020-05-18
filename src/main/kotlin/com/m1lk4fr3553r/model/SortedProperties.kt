@@ -9,14 +9,14 @@ class SortedProperties: Properties() {
     )
 
     @Throws(IOException::class)
-    override fun store(writer: Writer?, comments: String?) {
+    override fun store(writer: Writer, comments: String?) {
         store0(if (writer is BufferedWriter) writer else BufferedWriter(writer),
                 comments,
                 false)
     }
 
     @Throws(IOException::class)
-    override fun store(out: OutputStream?, comments: String?) {
+    override fun store(out: OutputStream, comments: String?) {
         store0(BufferedWriter(OutputStreamWriter(out, "8859_1")),
                 comments,
                 true)

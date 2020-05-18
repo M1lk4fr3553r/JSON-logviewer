@@ -27,7 +27,7 @@ class ItemListCellRenderer(private val mainWindow: MainWindow) : DefaultListCell
             "DEBUG" -> component.foreground = debugColor
         }
 
-        if (!isSelected && !mainWindow.searchField.text.equals("") && item.raw.contains(mainWindow.searchField.text.toLowerCase())) {
+        if (!isSelected && mainWindow.searchField.text != "" && item.raw.contains(mainWindow.searchField.text.toLowerCase())) {
             component.background = searchColor
         }
         return component
