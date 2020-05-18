@@ -4,13 +4,12 @@ import com.m1lk4fr3553r.controller.MainWindowController
 import com.m1lk4fr3553r.updater.github.GitHubUpdater
 import com.m1lk4fr3553r.updater.github.GitHubUpdaterCallback
 import com.m1lk4fr3553r.util.Util
-import java.io.File
 import java.io.FileOutputStream
 import javax.swing.JOptionPane
 
 fun main(args: Array<String>) {
     GitHubUpdater.createInstance("https://github.com/M1lk4fr3553r/JSON-logviewer", UpdaterCallback())
-            .checkForUpdate("v1.3")
+            .checkForUpdate("v1.4")
 
     val stream = Util::class.java.classLoader.getResourceAsStream("_JSONlogviewer.properties")
     val outfile = Util.getPropertiesFile()
