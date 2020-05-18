@@ -27,7 +27,7 @@ class Util {
             val watchChannel = file.asWatchChannel()
             GlobalScope.launch {
                 watchChannel.consumeEach {
-                    if (it.file == file) {
+                    if (it.file == file && file.exists()) {
                         loadProperties()
                     }
                 }
