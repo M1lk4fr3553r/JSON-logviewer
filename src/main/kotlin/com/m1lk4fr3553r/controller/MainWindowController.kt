@@ -8,12 +8,14 @@ import com.m1lk4fr3553r.view.MainWindowMenuBar
 import org.json.JSONException
 import java.awt.Desktop
 import java.awt.KeyboardFocusManager
+import java.awt.datatransfer.DataFlavor
+import java.awt.dnd.*
 import java.awt.event.KeyEvent
 import java.io.File
 import javax.swing.DefaultFocusManager
 import javax.swing.JFileChooser
 
-class MainWindowController : DefaultFocusManager() {
+class MainWindowController : DefaultFocusManager(), DropTargetListener {
     private val frame = MainWindow("JSON logviewer")
     private var loadedData = emptyArray<JSONListItem>()
     private var displayedData = loadedData
@@ -27,6 +29,7 @@ class MainWindowController : DefaultFocusManager() {
         frame.list.addMouseListener(MainWindowMouseAdapter(frame))
         Util.watchProperties()
         loadFile(Util.getProperties().getProperty("path.last", ""))
+        DropTarget(frame, DnDConstants.ACTION_COPY_OR_MOVE, this, true)
     }
 
     fun loadFileWithOpenDialog() {
@@ -152,5 +155,29 @@ class MainWindowController : DefaultFocusManager() {
             }
         }
         return false
+    }
+
+    override fun dropActionChanged(dtde: DropTargetDragEvent?) {
+        // Currently no logic needed
+    }
+
+    override fun drop(dtde: DropTargetDropEvent?) {
+        dtde?.acceptDrop(DnDConstants.ACTION_COPY_OR_MOVE)
+        val data = dtde?.transferable?.getTransferData(DataFlavor.javaFileListFlavor)
+        if (data is List<*>) {
+            loadFile(data[0] as File, true)
+        }
+    }
+
+    override fun dragOver(dtde: DropTargetDragEvent?) {
+        // Currently no logic needed
+    }
+
+    override fun dragExit(dte: DropTargetEvent?) {
+        // Currently no logic needed
+    }
+
+    override fun dragEnter(dtde: DropTargetDragEvent?) {
+        // Currently no logic needed
     }
 }
