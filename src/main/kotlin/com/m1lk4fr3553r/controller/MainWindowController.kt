@@ -28,14 +28,17 @@ class MainWindowController : DefaultFocusManager(), DropTargetListener {
         frame.searchField.addKeyListener(FilterKeyListener(::search, ::resetSearch))
         frame.list.addMouseListener(MainWindowMouseAdapter(frame))
         Util.watchProperties()
-        loadFile(Util.getProperties().getProperty("path.last", ""))
+        loadFile(Util.getProperties().misc.lastFile)
         DropTarget(frame, DnDConstants.ACTION_COPY_OR_MOVE, this, true)
     }
 
     fun loadFileWithOpenDialog() {
         //Load last opened file
         val properties = Util.getProperties()
-        val lastPath = properties.getProperty("path.last", "%userhome%")
+        var lastPath = properties.misc.lastFile
+        if (lastPath.equals("")) {
+            lastPath = "%USERHOME%"
+        }
 
         val fileChooser = JFileChooser(lastPath)
         fileChooser.showOpenDialog(frame)
@@ -57,7 +60,7 @@ class MainWindowController : DefaultFocusManager(), DropTargetListener {
                 if (updateLocation) {
                     // Store selected file to Properties
                     val properties = Util.getProperties()
-                    properties.setProperty("path.last", file.absolutePath)
+                    properties.misc.lastFile = file.absolutePath
                     Util.saveProperties(properties)
                 }
                 Util.watchForChanges(file, this)

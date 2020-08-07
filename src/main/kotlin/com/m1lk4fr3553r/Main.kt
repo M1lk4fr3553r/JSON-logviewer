@@ -1,6 +1,7 @@
 package com.m1lk4fr3553r
 
 import com.m1lk4fr3553r.controller.MainWindowController
+import com.m1lk4fr3553r.model.properties.Properties
 import com.m1lk4fr3553r.updater.github.GitHubUpdater
 import com.m1lk4fr3553r.updater.github.GitHubUpdaterCallback
 import com.m1lk4fr3553r.util.Util
@@ -11,10 +12,9 @@ fun main(args: Array<String>) {
     GitHubUpdater.createInstance("https://github.com/M1lk4fr3553r/JSON-logviewer", UpdaterCallback())
             .checkForUpdate("v1.4")
 
-    val stream = Util::class.java.classLoader.getResourceAsStream("_JSONlogviewer.properties")
     val outfile = Util.getPropertiesFile()
-    if (!outfile.exists() && stream != null) {
-        FileOutputStream(outfile).write(stream.readAllBytes())
+    if (!outfile.exists()) {
+        Properties().store()
     }
     val controller = MainWindowController()
 
