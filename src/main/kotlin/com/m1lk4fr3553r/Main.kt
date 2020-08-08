@@ -9,13 +9,17 @@ import java.util.concurrent.TimeUnit
 import javax.swing.JOptionPane
 
 fun main(args: Array<String>) {
-    GitHubUpdater.createInstance("https://github.com/M1lk4fr3553r/JSON-logviewer", UpdaterCallback())
-            .checkForUpdate("v1.4")
-
     val outfile = Util.getPropertiesFile()
     if (!outfile.exists()) {
         Properties().store()
     }
+
+    if (!Util.getProperties().misc.disableUpdate) {
+        GitHubUpdater.createInstance("https://github.com/M1lk4fr3553r/JSON-logviewer", UpdaterCallback())
+                .checkForUpdate("v1.3")
+    }
+
+
     val controller = MainWindowController()
 
     if (args.isNotEmpty()) {
