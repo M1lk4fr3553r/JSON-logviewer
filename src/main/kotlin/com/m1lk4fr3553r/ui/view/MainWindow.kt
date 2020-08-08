@@ -1,11 +1,13 @@
-package com.m1lk4fr3553r.view
+package com.m1lk4fr3553r.ui.view
 
+import com.m1lk4fr3553r.model.ItemTableModel
 import com.m1lk4fr3553r.model.JSONListItem
 import java.awt.BorderLayout
 import javax.swing.*
+import javax.swing.JTable.*;
 
 class MainWindow(title: String) : JFrame() {
-    val list = JList<JSONListItem>()
+    val table = JTable(ItemTableModel())
     val filterField = JTextField()
     val searchField = JTextField()
     private val scrollPane: JScrollPane
@@ -13,8 +15,9 @@ class MainWindow(title: String) : JFrame() {
 
     init {
         initWindow(title)
-        list.cellRenderer = ItemListCellRenderer(this)
-        scrollPane = JScrollPane(list)
+        table.setDefaultRenderer(JSONListItem::class.java, ItemTableCellRenderer(this))
+        table.autoResizeMode = AUTO_RESIZE_LAST_COLUMN
+        scrollPane = JScrollPane(table)
         add(scrollPane)
         statusBar.add(JLabel("Filter:"))
         statusBar.add(filterField)

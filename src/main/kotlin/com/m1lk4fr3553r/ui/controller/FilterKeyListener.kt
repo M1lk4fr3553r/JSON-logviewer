@@ -1,4 +1,4 @@
-package com.m1lk4fr3553r.controller
+package com.m1lk4fr3553r.ui.controller
 
 import java.awt.event.KeyEvent
 import java.awt.event.KeyListener
