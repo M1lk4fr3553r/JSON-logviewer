@@ -5,7 +5,6 @@ import com.m1lk4fr3553r.model.properties.Properties
 import com.m1lk4fr3553r.updater.github.GitHubUpdater
 import com.m1lk4fr3553r.updater.github.GitHubUpdaterCallback
 import com.m1lk4fr3553r.util.Util
-import java.io.FileOutputStream
 import javax.swing.JOptionPane
 
 fun main(args: Array<String>) {
