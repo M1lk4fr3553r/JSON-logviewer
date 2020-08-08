@@ -1,12 +1,12 @@
-package com.m1lk4fr3553r.controller
+package com.m1lk4fr3553r.ui.controller
 
 import com.m1lk4fr3553r.util.Util
 import com.m1lk4fr3553r.model.JSONListItem
-import com.m1lk4fr3553r.view.ItemView
-import com.m1lk4fr3553r.view.MainWindow
-import com.m1lk4fr3553r.view.MainWindowMenuBar
+import com.m1lk4fr3553r.ui.view.ItemView
+import com.m1lk4fr3553r.ui.view.MainWindow
+import com.m1lk4fr3553r.ui.view.MainWindowMenuBar
+import com.m1lk4fr3553r.ui.view.SettingsWindow
 import org.json.JSONException
-import java.awt.Desktop
 import java.awt.KeyboardFocusManager
 import java.awt.datatransfer.DataFlavor
 import java.awt.dnd.*
@@ -28,14 +28,17 @@ class MainWindowController : DefaultFocusManager(), DropTargetListener {
         frame.searchField.addKeyListener(FilterKeyListener(::search, ::resetSearch))
         frame.list.addMouseListener(MainWindowMouseAdapter(frame))
         Util.watchProperties()
-        loadFile(Util.getProperties().getProperty("path.last", ""))
+        loadFile(Util.getProperties().misc.lastFile)
         DropTarget(frame, DnDConstants.ACTION_COPY_OR_MOVE, this, true)
     }
 
     fun loadFileWithOpenDialog() {
         //Load last opened file
         val properties = Util.getProperties()
-        val lastPath = properties.getProperty("path.last", "%userhome%")
+        var lastPath = properties.misc.lastFile
+        if (lastPath.equals("")) {
+            lastPath = "%USERHOME%"
+        }
 
         val fileChooser = JFileChooser(lastPath)
         fileChooser.showOpenDialog(frame)
@@ -57,7 +60,7 @@ class MainWindowController : DefaultFocusManager(), DropTargetListener {
                 if (updateLocation) {
                     // Store selected file to Properties
                     val properties = Util.getProperties()
-                    properties.setProperty("path.last", file.absolutePath)
+                    properties.misc.lastFile = file.absolutePath
                     Util.saveProperties(properties)
                 }
                 Util.watchForChanges(file, this)
@@ -69,8 +72,7 @@ class MainWindowController : DefaultFocusManager(), DropTargetListener {
     }
 
     fun openSettings() {
-        val desktop = Desktop.getDesktop()
-        desktop.open(Util.getPropertiesFile())
+        SettingsWindow(this.frame)
     }
 
     fun requestFilter() {

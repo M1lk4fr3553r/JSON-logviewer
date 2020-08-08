@@ -1,4 +1,4 @@
-package com.m1lk4fr3553r.view
+package com.m1lk4fr3553r.ui.view
 
 import com.m1lk4fr3553r.util.Util
 import com.m1lk4fr3553r.model.JSONListItem
@@ -10,11 +10,11 @@ import javax.swing.JList
 class ItemListCellRenderer(private val mainWindow: MainWindow) : DefaultListCellRenderer() {
     override fun getListCellRendererComponent(list: JList<*>?, value: Any?, index: Int, isSelected: Boolean, cellHasFocus: Boolean): Component {
         val props = Util.getProperties()
-        val infoColor = Color.decode(props.getProperty("color.info", "#000000"))
-        val warnColor = Color.decode(props.getProperty("color.warn", "#ada401"))
-        val errorColor = Color.decode(props.getProperty("color.error", "#aa0000"))
-        val debugColor = Color.decode(props.getProperty("color.debug", "#0037dd"))
-        val searchColor = Color.decode(props.getProperty("color.search", "#9c9e67"))
+        val infoColor = Color.decode(props.color.info)
+        val warnColor = Color.decode(props.color.warn)
+        val errorColor = Color.decode(props.color.error)
+        val debugColor = Color.decode(props.color.debug)
+        val searchColor = Color.decode(props.color.search)
 
         val item = (value as JSONListItem)
 

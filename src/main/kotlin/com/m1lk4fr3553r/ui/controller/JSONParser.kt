@@ -1,4 +1,4 @@
-package com.m1lk4fr3553r.controller
+package com.m1lk4fr3553r.ui.controller
 
 import com.m1lk4fr3553r.util.Util
 import com.m1lk4fr3553r.model.JSONListItem
@@ -15,9 +15,9 @@ class JSONParser {
                 val tokener = JSONTokener(line)
                 val jsonObject = JSONObject(tokener)
                 val item = JSONListItem(jsonObject)
-                item.timestampKey = prop.getProperty("key.timestamp", "timestamp")
-                item.levelKey = prop.getProperty("key.level", "level")
-                item.messageKey = prop.getProperty("key.message", "message")
+                item.timestampKey = prop.key.timestamp
+                item.levelKey = prop.key.level
+                item.messageKey = prop.key.message
                 items += item
             }
             return items
