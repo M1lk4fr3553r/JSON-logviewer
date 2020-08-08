@@ -10,6 +10,21 @@ class JSONListItem(val json: JSONObject) {
     var levelKey = "level"
     var messageKey = "message"
 
+    val timestamp: String?
+    get() {
+        return items[timestampKey]
+    }
+
+    val level: String?
+    get() {
+        return items[levelKey]
+    }
+
+    val message: String?
+    get() {
+        return items[messageKey]
+    }
+
     init {
         for (key in json.keys()) {
             items.put(key, json.get(key).toString())

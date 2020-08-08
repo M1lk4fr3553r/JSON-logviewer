@@ -10,6 +10,7 @@ class Colors : DisplayableSettings {
     var info: String = "#000000"
     var search: String = "#9c9e67"
     var warn: String = "#ada401"
+    var colorEntireRow: Boolean = false
 
     override fun getKeys(): Array<String> {
         return arrayOf(
@@ -17,7 +18,8 @@ class Colors : DisplayableSettings {
                 "error",
                 "info",
                 "search",
-                "warn"
+                "warn",
+                "colorEntireRow"
         )
     }
 
@@ -27,7 +29,8 @@ class Colors : DisplayableSettings {
                 error,
                 info,
                 search,
-                warn
+                warn,
+                colorEntireRow.toString()
         )
     }
 
@@ -37,5 +40,6 @@ class Colors : DisplayableSettings {
         info = values[2]
         search = values[3]
         warn = values[4]
+        colorEntireRow = values[5].toBoolean()
     }
 }

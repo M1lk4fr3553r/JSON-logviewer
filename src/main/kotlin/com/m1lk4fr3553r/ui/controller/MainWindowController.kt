@@ -1,5 +1,6 @@
 package com.m1lk4fr3553r.ui.controller
 
+import com.m1lk4fr3553r.model.ItemTableModel
 import com.m1lk4fr3553r.util.Util
 import com.m1lk4fr3553r.model.JSONListItem
 import com.m1lk4fr3553r.ui.view.ItemView
@@ -26,7 +27,7 @@ class MainWindowController : DefaultFocusManager(), DropTargetListener {
         KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(this)
         frame.filterField.addKeyListener(FilterKeyListener(::filter, ::resetFilter))
         frame.searchField.addKeyListener(FilterKeyListener(::search, ::resetSearch))
-        frame.list.addMouseListener(MainWindowMouseAdapter(frame))
+        frame.table.addMouseListener(MainWindowMouseAdapter(frame))
         Util.watchProperties()
         loadFile(Util.getProperties().misc.lastFile)
         DropTarget(frame, DnDConstants.ACTION_COPY_OR_MOVE, this, true)
@@ -55,7 +56,7 @@ class MainWindowController : DefaultFocusManager(), DropTargetListener {
         if (file.isFile) {
             try {
                 loadedData = JSONParser.parse(file).reversedArray()
-                frame.list.setListData(loadedData)
+                (frame.table.model as ItemTableModel).setData(loadedData)
                 displayedData = loadedData
                 if (updateLocation) {
                     // Store selected file to Properties
@@ -81,16 +82,16 @@ class MainWindowController : DefaultFocusManager(), DropTargetListener {
 
     private fun filter() {
         val filtered: List<JSONListItem> = loadedData.filter { it.raw.contains(frame.filterField.text.toLowerCase()) }
-        frame.list.setListData(filtered.toTypedArray())
+        (frame.table.model as ItemTableModel).setData(filtered.toTypedArray())
         displayedData = filtered.toTypedArray()
-        frame.list.requestFocus()
+        frame.table.requestFocus()
     }
 
     private fun resetFilter() {
         frame.filterField.text = ""
-        frame.list.setListData(loadedData)
+        (frame.table.model as ItemTableModel).setData(loadedData)
         displayedData = loadedData
-        frame.list.requestFocus()
+        frame.table.requestFocus()
     }
 
     fun requestSearch() {
@@ -100,18 +101,18 @@ class MainWindowController : DefaultFocusManager(), DropTargetListener {
     private fun search() {
         val results = displayedData.filter { it.raw.contains(frame.searchField.text.toLowerCase()) }.map { displayedData.indexOf(it) }
         for (i in results) {
-            if (i > frame.list.selectedIndex) {
-                frame.list.setSelectedValue(frame.list.model.getElementAt(i), true)
+            if (i > frame.table.selectedRow) {
+                frame.table.setRowSelectionInterval(i, i)
                 break
             }
         }
-        frame.list.repaint()
+        frame.table.repaint()
     }
 
     private fun resetSearch() {
         frame.searchField.text = ""
-        frame.list.requestFocus()
-        frame.list.repaint()
+        frame.table.requestFocus()
+        frame.table.repaint()
     }
 
     override fun dispatchKeyEvent(e: KeyEvent?): Boolean {
@@ -121,7 +122,7 @@ class MainWindowController : DefaultFocusManager(), DropTargetListener {
                 when (e.keyCode) {
                     // ENTER
                     10 -> {
-                        ItemView(frame.list.selectedValue, frame)
+                        ItemView((frame.table.model as ItemTableModel).getItem(frame.table.selectedRow)!!, frame)
                         return true
                     }
                     // CTRL + F
@@ -145,8 +146,8 @@ class MainWindowController : DefaultFocusManager(), DropTargetListener {
                 when (e.keyCode) {
                     // ENTER
                     10 -> {
-                        if (frame.list.selectedValue != null) {
-                            ItemView(frame.list.selectedValue, frame)
+                        if ((frame.table.model as ItemTableModel).getItem(frame.table.selectedRow) != null) {
+                            ItemView((frame.table.model as ItemTableModel).getItem(frame.table.selectedRow)!!, frame)
                             return true
                         } else {
                             return false
