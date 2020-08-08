@@ -16,7 +16,7 @@ fun main(args: Array<String>) {
 
     if (!Util.getProperties().misc.disableUpdate) {
         GitHubUpdater.createInstance("https://github.com/M1lk4fr3553r/JSON-logviewer", UpdaterCallback())
-                .checkForUpdate("v1.3")
+                .checkForUpdate("v1.5")
     }
 
 
