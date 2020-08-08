@@ -5,6 +5,7 @@ import com.m1lk4fr3553r.ui.controller.SettingsWindowController
 import com.m1lk4fr3553r.util.plus
 import org.apache.commons.text.StringEscapeUtils
 import java.awt.BorderLayout
+import java.awt.event.ActionListener
 import javax.swing.*
 
 class SettingsWindow(parent: JFrame) : JFrame() {
@@ -25,7 +26,9 @@ class SettingsWindow(parent: JFrame) : JFrame() {
         add(jTabbedPane)
 
         buttonPanel.add(saveButton)
+        saveButton.addActionListener { controller.saveSettings() }
         buttonPanel.add(cancelButton)
+        cancelButton.addActionListener { this.dispose() }
         add(buttonPanel, BorderLayout.PAGE_END)
 
         isVisible = true

@@ -74,10 +74,6 @@ class MainWindowController : DefaultFocusManager(), DropTargetListener {
 
     fun openSettings() {
         SettingsWindow(this.frame)
-
-        TODO("Move this code")
-//        val desktop = Desktop.getDesktop()
-//        desktop.open(Util.getPropertiesFile())
     }
 
     fun requestFilter() {
