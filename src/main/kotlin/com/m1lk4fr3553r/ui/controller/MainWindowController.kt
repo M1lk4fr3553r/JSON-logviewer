@@ -7,7 +7,6 @@ import com.m1lk4fr3553r.ui.view.MainWindow
 import com.m1lk4fr3553r.ui.view.MainWindowMenuBar
 import com.m1lk4fr3553r.ui.view.SettingsWindow
 import org.json.JSONException
-import java.awt.Desktop
 import java.awt.KeyboardFocusManager
 import java.awt.datatransfer.DataFlavor
 import java.awt.dnd.*
