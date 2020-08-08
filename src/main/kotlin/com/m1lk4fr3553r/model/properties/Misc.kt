@@ -1,6 +1,5 @@
 package com.m1lk4fr3553r.model.properties
 
-import com.m1lk4fr3553r.model.SettingsListItem
 import com.m1lk4fr3553r.ui.view.DisplayableSettings
 import kotlinx.serialization.Serializable
 
@@ -8,13 +7,19 @@ import kotlinx.serialization.Serializable
 class Misc : DisplayableSettings {
     var lastFile: String = ""
 
-    override fun getSettings(): Array<SettingsListItem> {
+    override fun getKeys(): Array<String> {
         return arrayOf(
-                SettingsListItem("lastFile", lastFile)
+                "lastFile"
         )
     }
 
-    override fun setValues(values: Array<SettingsListItem>) {
-        lastFile = values[0].value
+    override fun getValues(): Array<String> {
+        return arrayOf(
+                lastFile
+        )
+    }
+
+    override fun setValues(values: Array<String>) {
+        lastFile = values[0]
     }
 }

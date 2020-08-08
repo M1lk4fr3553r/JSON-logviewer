@@ -1,6 +1,5 @@
 package com.m1lk4fr3553r.model.properties
 
-import com.m1lk4fr3553r.model.SettingsListItem
 import com.m1lk4fr3553r.ui.view.DisplayableSettings
 import kotlinx.serialization.Serializable
 
@@ -12,21 +11,31 @@ class Colors : DisplayableSettings {
     var search: String = "#9c9e67"
     var warn: String = "#ada401"
 
-    override fun getSettings(): Array<SettingsListItem> {
+    override fun getKeys(): Array<String> {
         return arrayOf(
-                SettingsListItem("debug", debug),
-                SettingsListItem("error", error),
-                SettingsListItem("info", info),
-                SettingsListItem("search", search),
-                SettingsListItem("warn", warn)
+                "debug",
+                "error",
+                "info",
+                "search",
+                "warn"
         )
     }
 
-    override fun setValues(values: Array<SettingsListItem>) {
-        debug = values[0].value
-        error = values[1].value
-        info = values[2].value
-        search = values[3].value
-        warn = values[4].value
+    override fun getValues(): Array<String> {
+        return arrayOf(
+                debug,
+                error,
+                info,
+                search,
+                warn
+        )
+    }
+
+    override fun setValues(values: Array<String>) {
+        debug = values[0]
+        error = values[1]
+        info = values[2]
+        search = values[3]
+        warn = values[4]
     }
 }
