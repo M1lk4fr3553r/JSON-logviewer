@@ -1,4 +1,4 @@
-package com.m1lk4fr3553r.view
+package com.m1lk4fr3553r.ui.view
 
 import com.m1lk4fr3553r.util.Util
 import com.m1lk4fr3553r.model.JSONListItem

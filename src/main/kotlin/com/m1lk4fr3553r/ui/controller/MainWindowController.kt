@@ -1,10 +1,11 @@
-package com.m1lk4fr3553r.controller
+package com.m1lk4fr3553r.ui.controller
 
 import com.m1lk4fr3553r.util.Util
 import com.m1lk4fr3553r.model.JSONListItem
-import com.m1lk4fr3553r.view.ItemView
-import com.m1lk4fr3553r.view.MainWindow
-import com.m1lk4fr3553r.view.MainWindowMenuBar
+import com.m1lk4fr3553r.ui.view.ItemView
+import com.m1lk4fr3553r.ui.view.MainWindow
+import com.m1lk4fr3553r.ui.view.MainWindowMenuBar
+import com.m1lk4fr3553r.ui.view.SettingsWindow
 import org.json.JSONException
 import java.awt.Desktop
 import java.awt.KeyboardFocusManager
@@ -72,8 +73,11 @@ class MainWindowController : DefaultFocusManager(), DropTargetListener {
     }
 
     fun openSettings() {
-        val desktop = Desktop.getDesktop()
-        desktop.open(Util.getPropertiesFile())
+        SettingsWindow(this.frame)
+
+        TODO("Move this code")
+//        val desktop = Desktop.getDesktop()
+//        desktop.open(Util.getPropertiesFile())
     }
 
     fun requestFilter() {

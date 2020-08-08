@@ -1,7 +1,7 @@
-package com.m1lk4fr3553r.controller
+package com.m1lk4fr3553r.ui.controller
 
 import com.m1lk4fr3553r.model.JSONListItem
-import com.m1lk4fr3553r.view.ItemView
+import com.m1lk4fr3553r.ui.view.ItemView
 import java.awt.event.MouseAdapter
 import java.awt.event.MouseEvent
 import javax.swing.JFrame

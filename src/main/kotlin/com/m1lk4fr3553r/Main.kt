@@ -1,6 +1,6 @@
 package com.m1lk4fr3553r
 
-import com.m1lk4fr3553r.controller.MainWindowController
+import com.m1lk4fr3553r.ui.controller.MainWindowController
 import com.m1lk4fr3553r.model.properties.Properties
 import com.m1lk4fr3553r.updater.github.GitHubUpdater
 import com.m1lk4fr3553r.updater.github.GitHubUpdaterCallback

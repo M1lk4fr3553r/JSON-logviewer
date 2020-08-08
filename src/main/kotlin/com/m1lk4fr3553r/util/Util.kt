@@ -1,6 +1,6 @@
 package com.m1lk4fr3553r.util
 
-import com.m1lk4fr3553r.controller.MainWindowController
+import com.m1lk4fr3553r.ui.controller.MainWindowController
 import com.m1lk4fr3553r.model.properties.Properties
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.channels.consumeEach

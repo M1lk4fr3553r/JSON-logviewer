@@ -1,6 +1,6 @@
-package com.m1lk4fr3553r.view
+package com.m1lk4fr3553r.ui.view
 
-import com.m1lk4fr3553r.controller.MainWindowController
+import com.m1lk4fr3553r.ui.controller.MainWindowController
 import javax.swing.JMenu
 import javax.swing.JMenuBar
 import javax.swing.JMenuItem
