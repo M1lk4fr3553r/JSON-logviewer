@@ -47,7 +47,7 @@ class Util {
 
             GlobalScope.launch {
                 loadedFileChannel!!.consumeEach {
-                    if (it.file == file) {
+                    if (it.file == file && it.kind == KWatchEvent.Kind.Modified) {
                         controller.loadedData = JSONParser.parse(file).reversedArray()
                         controller.displayedData = controller.loadedData
                     }
