@@ -50,39 +50,17 @@
             <artifactId>kotlinx-serialization-runtime</artifactId>
             <version>0.20.0</version>
         </dependency>
-
     </dependencies>
+
+    <scm>
+        <connection>scm:git:git@github.com:M1lk4fr3553r/JSON-logviewer.git</connection>
+        <url>https://github.com/M1lk4fr3553r/JSON-logviewer.git</url>
+        <tag>HEAD</tag>
+    </scm>
 
     <build>
         <sourceDirectory>src/main/kotlin</sourceDirectory>
         <plugins>
-            <plugin>
-                <groupId>org.jetbrains.kotlin</groupId>
-                <artifactId>kotlin-maven-plugin</artifactId>
-                <version>${kotlin.version}</version>
-                <executions>
-                    <execution>
-                        <id>compile</id>
-                        <phase>compile</phase>
-                        <goals>
-                            <goal>compile</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <compilerPlugins>
-                        <plugin>kotlinx-serialization</plugin>
-                    </compilerPlugins>
-                </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.jetbrains.kotlin</groupId>
-                        <artifactId>kotlin-maven-serialization</artifactId>
-                        <version>${kotlin.version}</version>
-                    </dependency>
-                </dependencies>
-            </plugin>
-
             <plugin>
                 <groupId>org.jetbrains.kotlin</groupId>
                 <artifactId>kotlin-maven-plugin</artifactId>
@@ -105,6 +83,66 @@
                 </executions>
                 <configuration>
                     <jvmTarget>9</jvmTarget>
+                    <compilerPlugins>
+                        <plugin>kotlinx-serialization</plugin>
+                    </compilerPlugins>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.jetbrains.kotlin</groupId>
+                        <artifactId>kotlin-maven-serialization</artifactId>
+                        <version>${kotlin.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>buildnumber-maven-plugin</artifactId>
+                <version>1.4</version>
+                <executions>
+                    <execution>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>create</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <shortRevisionLength>7</shortRevisionLength>
+                    <doCheck>false</doCheck>
+                    <doUpdate>false</doUpdate>
+                    <timestampFormat>{0,date,yyy-MM-dd HH:mm:ss}</timestampFormat>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.google.code.maven-replacer-plugin</groupId>
+                <artifactId>replacer</artifactId>
+                <version>1.5.3</version>
+                <executions>
+                    <execution>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>replace</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <file>${project.basedir}/src/main/kotlin/com/m1lk4fr3553r/util/Globals.kt</file>
+                    <replacements>
+                        <replacement>
+                            <token>VERSION:\s+String\s+=.*</token>
+                            <value>VERSION: String = "${project.version}"</value>
+                        </replacement>
+                        <replacement>
+                            <token>BUILD:\s+String\s+=.*</token>
+                            <value>BUILD: String = "${buildNumber}"</value>
+                        </replacement>
+                        <replacement>
+                            <token>BUILD_DATE:\s+String\s+=.*</token>
+                            <value>BUILD_DATE: String = "${timestamp}"</value>
+                        </replacement>
+                    </replacements>
                 </configuration>
             </plugin>
 
