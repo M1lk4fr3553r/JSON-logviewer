@@ -4,8 +4,8 @@ import com.m1lk4fr3553r.ui.controller.MainWindowController
 import com.m1lk4fr3553r.model.properties.Properties
 import com.m1lk4fr3553r.updater.github.GitHubUpdater
 import com.m1lk4fr3553r.updater.github.GitHubUpdaterCallback
+import com.m1lk4fr3553r.util.Globals
 import com.m1lk4fr3553r.util.Util
-import java.util.concurrent.TimeUnit
 import javax.swing.JOptionPane
 
 fun main(args: Array<String>) {
@@ -16,7 +16,7 @@ fun main(args: Array<String>) {
 
     if (!Util.getProperties().misc.disableUpdate) {
         GitHubUpdater.createInstance("https://github.com/M1lk4fr3553r/JSON-logviewer", UpdaterCallback())
-                .checkForUpdate("v1.5")
+                .checkForUpdate("v${Globals.VERSION}")
     }
 
 

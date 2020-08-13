@@ -2,6 +2,7 @@ package com.m1lk4fr3553r.util
 
 import com.m1lk4fr3553r.ui.controller.MainWindowController
 import com.m1lk4fr3553r.model.properties.Properties
+import com.m1lk4fr3553r.ui.controller.JSONParser
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.channels.consumeEach
 import kotlinx.coroutines.launch
@@ -10,6 +11,7 @@ import java.io.File
 
 class Util {
     companion object {
+        private var loadedFileChannel: KWatchChannel? = null
         private var properties: Properties? = null
 
         fun getProperties(): Properties {
@@ -40,13 +42,14 @@ class Util {
         }
 
         fun watchForChanges(file: File, controller: MainWindowController) {
-            val watchChannel = file.asWatchChannel()
+            loadedFileChannel?.close()
+            loadedFileChannel = file.asWatchChannel()
 
             GlobalScope.launch {
-                watchChannel.consumeEach {
-                    if (it.file == file) {
-                        controller.loadFile(file, false)
-                        watchChannel.close()
+                loadedFileChannel!!.consumeEach {
+                    if (it.file == file && it.kind == KWatchEvent.Kind.Modified) {
+                        controller.loadedData = JSONParser.parse(file).reversedArray()
+                        controller.displayedData = controller.loadedData
                     }
                 }
             }

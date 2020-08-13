@@ -13,7 +13,7 @@ class Properties {
     val misc = Misc()
 
     companion object {
-        private val jsonConfig = JsonConfiguration(encodeDefaults = true, unquotedPrint = false, prettyPrint = true, indent = "  ")
+        private val jsonConfig = JsonConfiguration(encodeDefaults = true, unquotedPrint = false, prettyPrint = true, indent = "  ", ignoreUnknownKeys = true)
 
         fun load(): Properties {
             val json = Json(jsonConfig)
