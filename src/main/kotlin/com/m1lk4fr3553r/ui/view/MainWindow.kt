@@ -2,7 +2,10 @@ package com.m1lk4fr3553r.ui.view
 
 import com.m1lk4fr3553r.model.ItemTableModel
 import com.m1lk4fr3553r.model.JSONListItem
+import com.m1lk4fr3553r.ui.controller.ItemTableKeyListener
 import java.awt.BorderLayout
+import java.awt.event.KeyEvent
+import java.awt.event.KeyListener
 import javax.swing.*
 import javax.swing.JTable.*;
 
@@ -17,6 +20,7 @@ class MainWindow(title: String) : JFrame() {
         initWindow(title)
         table.setDefaultRenderer(JSONListItem::class.java, ItemTableCellRenderer(this))
         table.autoResizeMode = AUTO_RESIZE_LAST_COLUMN
+        table.addKeyListener(ItemTableKeyListener())
         scrollPane = JScrollPane(table)
         add(scrollPane)
         statusBar.add(JLabel("Filter:"))
