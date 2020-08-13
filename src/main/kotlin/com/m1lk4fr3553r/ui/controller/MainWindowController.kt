@@ -22,7 +22,7 @@ class MainWindowController : DefaultFocusManager(), DropTargetListener {
     var displayedData = loadedData
     set(data) {
         field = data
-        (frame.table.model as ItemTableModel).setData(loadedData)
+        (frame.table.model as ItemTableModel).setData(data)
     }
 
     init {
